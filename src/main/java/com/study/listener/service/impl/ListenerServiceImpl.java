@@ -3,6 +3,7 @@ package com.study.listener.service.impl;
 import com.study.listener.event.EmailEvent;
 import com.study.listener.service.IListenerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -19,12 +20,15 @@ import org.springframework.web.context.WebApplicationContext;
 @Service
 public class ListenerServiceImpl implements IListenerService {
 
+//    @Autowired
+//    private WebApplicationContext webapplicationcontext; //实现了ApplicationContext
+
     @Autowired
-    private WebApplicationContext webapplicationcontext;
+    private ApplicationContext context;
 
     @Override
     public void springListener() {
         EmailEvent emailEvent = new EmailEvent("object", "172572575@qq.com", "###listener");
-        webapplicationcontext.publishEvent(emailEvent);
+        context.publishEvent(emailEvent);
     }
 }

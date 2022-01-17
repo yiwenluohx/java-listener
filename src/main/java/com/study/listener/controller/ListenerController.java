@@ -26,6 +26,7 @@ public class ListenerController {
 
     @RequestMapping("/spring/listener")
     public ResponseEntity<String> springListener() {
+
         listenerService.springListener();
         return new ResponseEntity<>("", HttpStatus.OK);
     }
