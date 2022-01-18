@@ -7,6 +7,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
 /**
  * ClassName: ListenerServiceImpl
  * Description: 具体监听器实现
@@ -28,7 +32,10 @@ public class ListenerServiceImpl implements IListenerService {
 
     @Override
     public void springListener() {
-        EmailEvent emailEvent = new EmailEvent("object", "172572575@qq.com", "###listener");
-        context.publishEvent(emailEvent);
+        ScheduledExecutorService executorService = new ScheduledThreadPoolExecutor(2);
+        executorService.schedule(() -> {
+            EmailEvent emailEvent = new EmailEvent("object", "815268151@qq.com", "###我的listener");
+            context.publishEvent(emailEvent);
+        }, 3, TimeUnit.SECONDS);
     }
 }
